@@ -1,6 +1,11 @@
 package com.mert.loanapp.entity;
 
+import java.util.Date;
+import java.util.Objects;
+
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.mert.loanapp.entity.enums.LoanStatus;
 
@@ -13,9 +18,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 
 @Entity
+@Table(name = "loan_application")
 public class LoanApplication extends BaseEntity {
 
 	/**
@@ -27,8 +34,9 @@ public class LoanApplication extends BaseEntity {
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 	private String id;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "user_id", nullable = false)
 	private Customer customer;
 	
@@ -42,28 +50,36 @@ public class LoanApplication extends BaseEntity {
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private LoanStatus status = LoanStatus.PENDING;
-	
+
 	public LoanApplication() {
 		
 	}
 	
-	private LoanApplication(LoanApplicationBuilder builder) {
-		this.customer = builder.customer;
-		this.loanAmount = builder.loanAmount;
-		this.collateral = builder.collateral;
-		this.status = builder.status;
+	public LoanApplication(Date createdAt, Date updatedAt, String id, Customer customer,
+			@Min(value = 0, message = "Loan amount cannot be negative") double loanAmount,
+			@Min(value = 0, message = "Loan amount cannot be negative") double collateral, LoanStatus status) {
+		super(createdAt, updatedAt);
+		this.id = id;
+		this.customer = customer;
+		this.loanAmount = loanAmount;
+		this.collateral = collateral;
+		this.status = status;
 	}
 
 	public String getId() {
 		return id;
 	}
 
-	public Customer getCustomer() {
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Customer getUser() {
 		return customer;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setUser(Customer user) {
+		this.customer = user;
 	}
 
 	public double getLoanAmount() {
@@ -91,48 +107,34 @@ public class LoanApplication extends BaseEntity {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(collateral, id, loanAmount, status, customer);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LoanApplication other = (LoanApplication) obj;
+		return Double.doubleToLongBits(collateral) == Double.doubleToLongBits(other.collateral)
+				&& Objects.equals(id, other.id)
+				&& Double.doubleToLongBits(loanAmount) == Double.doubleToLongBits(other.loanAmount)
+				&& status == other.status && Objects.equals(customer, other.customer);
+	}
+
+	@Override
 	public String toString() {
 		return "LoanApplication [id=" + id + ", customer=" + customer + ", loanAmount=" + loanAmount + ", collateral="
 				+ collateral + ", status=" + status + "]";
 	}
 	
-	public static class LoanApplicationBuilder{
-		
-		private Customer customer;
-		
-		private double loanAmount;
-		
-		private double collateral;
-		
-		private LoanStatus status = LoanStatus.PENDING;
-		
-		public LoanApplicationBuilder() {
-			
-		}
-		
-		public LoanApplicationBuilder customer(Customer customer) {
-			this.customer = customer;
-			return this;
-		}
-		
-		public LoanApplicationBuilder loanAmount(double loanAmount) {
-			this.loanAmount = loanAmount;
-			return this;
-		}
-		
-		public LoanApplicationBuilder collateral(double collateral) {
-			this.collateral = collateral;
-			return this;
-		}
-		
-		public LoanApplicationBuilder status(LoanStatus status) {
-			this.status = status;
-			return this;
-		}
-		
-		public LoanApplication build() {
-			return new LoanApplication(this);
-		}
-	}
+	
 	
 }

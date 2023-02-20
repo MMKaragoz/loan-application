@@ -1,20 +1,9 @@
-package com.mert.loanapp.entity;
+package com.mert.loanapp.client.dto.request;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
-import org.hibernate.annotations.Formula;
-import org.hibernate.annotations.GenericGenerator;
-
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -23,19 +12,7 @@ import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-@Entity
-@Table(name = "customer")
-public class Customer extends BaseEntity {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1587869248109644529L;
-
-	@Id
-	@GeneratedValue(generator = "UUID")
-	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-	private String id;
+public class CreateCustomerRequest {
 	
 	@NotBlank(message = "ID Number is required.")
 	@Pattern(regexp = "^[0-9]{10}[02468]$", message = "Id number must only be numbers, the length must be 11 and last digit must be even")
@@ -50,11 +27,9 @@ public class Customer extends BaseEntity {
 	@Size(min = 2, max = 100)
 	private String surname;
 	
-	@Formula("CONCAT_WS( ' ', name, surname ) " )
-    private String fullName;
-	
 	@Column(name = "email", unique = true, nullable = false)
     @Email(message = "Please enter valid email format")
+    // @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
     private String email;
 	
 	@NotNull(message = "Montly income is required.")
@@ -69,26 +44,16 @@ public class Customer extends BaseEntity {
 	@NotNull(message = "Birth date is required.")
 	@Past(message = "Birth date cannot be later than today.")
 	private LocalDate birthDate;
-	
-	private int creditScore;
-	
-	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, orphanRemoval = true)
-	private List<LoanApplication> loanApplications;
-	
-	public Customer() {
-		
-	}
 
-	public Customer(Date createdAt, Date updatedAt,
+	public CreateCustomerRequest(
 			@NotBlank(message = "ID Number is required.") @Pattern(regexp = "^[0-9]{10}[02468]$", message = "must only be numbers, the length must be 11 and last digit must be even") String idNumber,
 			@NotBlank(message = "Name is required.") @Size(min = 2, max = 100) String name,
 			@NotBlank(message = "Surname is required.") @Size(min = 2, max = 100) String surname,
 			@Email(message = "Please enter valid email format") String email,
 			@NotNull(message = "Montly income is required.") @Min(value = 0, message = "Monthly income cannot be negative") double monthlyIncome,
 			@NotBlank(message = "Phone number is required.") @Pattern(regexp = "^[0-9]{10}", message = "length must 10 digits") String phoneNumber,
-			@NotNull(message = "Birth date is required.") @Past(message = "Birth date cannot be later than today.") LocalDate birthDate,
-			int creditScore, List<LoanApplication> loanApplications) {
-		super(createdAt, updatedAt);
+			@NotNull(message = "Birth date is required.") @Past(message = "Birth date cannot be later than today.") LocalDate birthDate) {
+		super();
 		this.idNumber = idNumber;
 		this.name = name;
 		this.surname = surname;
@@ -96,16 +61,6 @@ public class Customer extends BaseEntity {
 		this.monthlyIncome = monthlyIncome;
 		this.phoneNumber = phoneNumber;
 		this.birthDate = birthDate;
-		this.creditScore = creditScore;
-		this.loanApplications = loanApplications;
-	}
-	
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getIdNumber() {
@@ -130,14 +85,6 @@ public class Customer extends BaseEntity {
 
 	public void setSurname(String surname) {
 		this.surname = surname;
-	}
-
-	public String getFullName() {
-		return fullName;
-	}
-
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
 	}
 
 	public String getEmail() {
@@ -172,44 +119,22 @@ public class Customer extends BaseEntity {
 		this.birthDate = birthDate;
 	}
 
-	public int getCreditScore() {
-		return creditScore;
-	}
-
-	public void setCreditScore(int creditScore) {
-		this.creditScore = creditScore;
-	}
-
-	public List<LoanApplication> getLoanApplications() {
-		return loanApplications;
-	}
-
-	public void setLoanApplications(List<LoanApplication> loanApplications) {
-		this.loanApplications = loanApplications;
-	}
-
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + Objects.hash(birthDate, creditScore, email, fullName, id, idNumber, loanApplications,
-				monthlyIncome, name, phoneNumber, surname);
-		return result;
+		return Objects.hash(birthDate, email, idNumber, monthlyIncome, name, phoneNumber, surname);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Customer other = (Customer) obj;
-		return Objects.equals(birthDate, other.birthDate) && creditScore == other.creditScore
-				&& Objects.equals(email, other.email) && Objects.equals(fullName, other.fullName)
-				&& Objects.equals(id, other.id) && Objects.equals(idNumber, other.idNumber)
-				&& Objects.equals(loanApplications, other.loanApplications)
+		CreateCustomerRequest other = (CreateCustomerRequest) obj;
+		return Objects.equals(birthDate, other.birthDate) && Objects.equals(email, other.email)
+				&& Objects.equals(idNumber, other.idNumber)
 				&& Double.doubleToLongBits(monthlyIncome) == Double.doubleToLongBits(other.monthlyIncome)
 				&& Objects.equals(name, other.name) && Objects.equals(phoneNumber, other.phoneNumber)
 				&& Objects.equals(surname, other.surname);
@@ -217,12 +142,9 @@ public class Customer extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", idNumber=" + idNumber + ", name=" + name + ", surname=" + surname
-				+ ", fullName=" + fullName + ", email=" + email + ", monthlyIncome=" + monthlyIncome + ", phoneNumber="
-				+ phoneNumber + ", birthDate=" + birthDate + ", creditScore=" + creditScore + ", loanApplications="
-				+ loanApplications + "]";
+		return "CreateCustomerRequest [idNumber=" + idNumber + ", name=" + name + ", surname=" + surname + ", email="
+				+ email + ", monthlyIncome=" + monthlyIncome + ", phoneNumber=" + phoneNumber + ", birthDate="
+				+ birthDate + "]";
 	}
-	
-	
-	
+
 }

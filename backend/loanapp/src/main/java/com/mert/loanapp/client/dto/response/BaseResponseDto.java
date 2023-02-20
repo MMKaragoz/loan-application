@@ -1,36 +1,18 @@
-package com.mert.loanapp.entity;
+package com.mert.loanapp.client.dto.response;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+public class BaseResponseDto {
 
-import jakarta.persistence.Column;
-import jakarta.persistence.MappedSuperclass;
-
-@MappedSuperclass
-public class BaseEntity implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3112392653659792946L;
-
-	@Column(name = "created_at")
-	@CreationTimestamp
 	private Date createdAt;
 	
-	@Column(name = "updated_at")
-	@UpdateTimestamp
 	private Date updatedAt;
-	
-	public BaseEntity() {
-		
-	}
 
-	public BaseEntity(Date createdAt, Date updatedAt) {
+	public BaseResponseDto() {}
+
+	public BaseResponseDto(Date createdAt, Date updatedAt) {
+		super();
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
@@ -64,13 +46,12 @@ public class BaseEntity implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		BaseEntity other = (BaseEntity) obj;
+		BaseResponseDto other = (BaseResponseDto) obj;
 		return Objects.equals(createdAt, other.createdAt) && Objects.equals(updatedAt, other.updatedAt);
 	}
 
 	@Override
 	public String toString() {
-		return "BaseEntity [createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+		return "BaseResponseDto [createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
-
 }
