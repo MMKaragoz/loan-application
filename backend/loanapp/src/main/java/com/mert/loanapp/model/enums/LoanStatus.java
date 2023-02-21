@@ -1,4 +1,4 @@
-package com.mert.loanapp.entity.enums;
+package com.mert.loanapp.model.enums;
 
 public enum LoanStatus {
 	PENDING, APPROVED, DECLINED

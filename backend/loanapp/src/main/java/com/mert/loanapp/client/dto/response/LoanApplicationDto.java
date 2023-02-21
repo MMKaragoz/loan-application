@@ -2,7 +2,7 @@ package com.mert.loanapp.client.dto.response;
 
 import java.util.Objects;
 
-import com.mert.loanapp.entity.enums.LoanStatus;
+import com.mert.loanapp.model.enums.LoanStatus;
 
 public class LoanApplicationDto extends BaseResponseDto {
 	

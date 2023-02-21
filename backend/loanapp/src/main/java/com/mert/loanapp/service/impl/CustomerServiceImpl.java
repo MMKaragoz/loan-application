@@ -7,8 +7,8 @@ import com.mert.loanapp.client.dto.request.CreateCustomerRequest;
 import com.mert.loanapp.client.dto.request.UpdateCustomerRequest;
 import com.mert.loanapp.client.dto.response.CustomerDto;
 import com.mert.loanapp.converter.CustomerConverter;
-import com.mert.loanapp.entity.Customer;
 import com.mert.loanapp.exception.NotFoundException;
+import com.mert.loanapp.model.Customer;
 import com.mert.loanapp.repository.CustomerRepository;
 import com.mert.loanapp.service.CreditScoreService;
 import com.mert.loanapp.service.CustomerService;
@@ -36,8 +36,9 @@ public class CustomerServiceImpl implements CustomerService {
 		customerRepository.save(customer);
 	}
 	
+	@Override
 	@Transactional(readOnly = true)
-	protected Customer findById(String id) {
+	public Customer findById(String id) {
 		return customerRepository.findById(id)
 				.orElseThrow(
 						() -> new NotFoundException("Customer could not find by " + id));

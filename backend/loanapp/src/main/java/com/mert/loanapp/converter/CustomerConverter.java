@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 import com.mert.loanapp.client.dto.request.CreateCustomerRequest;
 import com.mert.loanapp.client.dto.response.CustomerDto;
 import com.mert.loanapp.client.dto.response.LoanApplicationDto;
-import com.mert.loanapp.entity.Customer;
-import com.mert.loanapp.entity.LoanApplication;
+import com.mert.loanapp.model.Customer;
+import com.mert.loanapp.model.LoanApplication;
 
 @Component
 public class CustomerConverter {

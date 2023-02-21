@@ -1,4 +1,4 @@
-package com.mert.loanapp.entity;
+package com.mert.loanapp.model;
 
 import java.io.Serializable;
 import java.util.Date;

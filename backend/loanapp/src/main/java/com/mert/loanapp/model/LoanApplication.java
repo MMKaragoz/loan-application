@@ -1,4 +1,4 @@
-package com.mert.loanapp.entity;
+package com.mert.loanapp.model;
 
 import java.util.Date;
 import java.util.Objects;
@@ -7,7 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.mert.loanapp.entity.enums.LoanStatus;
+import com.mert.loanapp.model.enums.LoanStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -74,11 +74,11 @@ public class LoanApplication extends BaseEntity {
 		this.id = id;
 	}
 
-	public Customer getUser() {
+	public Customer getCustomer() {
 		return customer;
 	}
 
-	public void setUser(Customer user) {
+	public void setCustomer(Customer user) {
 		this.customer = user;
 	}
 

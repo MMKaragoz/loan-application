@@ -3,7 +3,7 @@ package com.mert.loanapp.converter;
 import org.springframework.stereotype.Component;
 
 import com.mert.loanapp.client.dto.response.LoanApplicationDto;
-import com.mert.loanapp.entity.LoanApplication;
+import com.mert.loanapp.model.LoanApplication;
 
 @Component
 public class LoanApplicationConverter {
@@ -17,4 +17,6 @@ public class LoanApplicationConverter {
 		loanApplicationDto.setStatus(loanApplication.getStatus());
 		return loanApplicationDto;
 	}
+	
+
 }
