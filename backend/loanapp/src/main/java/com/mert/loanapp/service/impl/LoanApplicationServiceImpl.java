@@ -8,9 +8,11 @@ import com.mert.loanapp.client.dto.request.UpdateLoanApplicationRequest;
 import com.mert.loanapp.client.dto.response.LoanApplicationDto;
 import com.mert.loanapp.converter.LoanApplicationConverter;
 import com.mert.loanapp.exception.NotFoundException;
+import com.mert.loanapp.model.Customer;
 import com.mert.loanapp.model.LoanApplication;
 import com.mert.loanapp.repository.LoanApplicationRepository;
 import com.mert.loanapp.service.CustomerService;
+import com.mert.loanapp.service.LoanApplicationEvaluatorService;
 import com.mert.loanapp.service.LoanApplicationService;
 
 import jakarta.validation.Valid;
@@ -21,20 +23,26 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 	private final LoanApplicationRepository loanApplicationRepository;
 	private final LoanApplicationConverter converter;
 	private final CustomerService customerService;
+	private final LoanApplicationEvaluatorService loanApplicationEvaluatorService;
 	
 	public LoanApplicationServiceImpl(LoanApplicationRepository loanApplicationRepository,
-			LoanApplicationConverter converter, CustomerService customerService) {
+			LoanApplicationConverter converter, CustomerService customerService,
+			LoanApplicationEvaluatorService loanApplicationEvaluatorService) {
 		this.loanApplicationRepository = loanApplicationRepository;
 		this.converter = converter;
 		this.customerService = customerService;
+		this.loanApplicationEvaluatorService = loanApplicationEvaluatorService;
 	}
 
 	@Override
 	@Transactional
 	public void create(@Valid CreateLoanApplicationRequest request) {
 		LoanApplication loanApplication = new LoanApplication();
-		loanApplication.setCustomer(customerService.findById(request.getCustomerId()));
+		Customer customer = customerService.findById(request.getCustomerId());
+		loanApplication.setCustomer(customer);
 		loanApplication.setCollateral(request.getCollateral());
+		
+		loanApplicationEvaluatorService.evaluateLoanApplication(loanApplication);
 		loanApplicationRepository.save(loanApplication);
 		
 	}
