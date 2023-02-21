@@ -50,6 +50,9 @@ public class LoanApplication extends BaseEntity {
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private LoanStatus status = LoanStatus.PENDING;
+	
+	@Min(value = 0, message = "Credit Limit factor cannot be negative")
+	private double creditLimitFactor = 4;
 
 	public LoanApplication() {
 		
@@ -106,11 +109,19 @@ public class LoanApplication extends BaseEntity {
 		this.status = status;
 	}
 
+	public double getCreditLimitFactor() {
+		return creditLimitFactor;
+	}
+
+	public void setCreditLimitFactor(double creditLimitFactor) {
+		this.creditLimitFactor = creditLimitFactor;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(collateral, id, loanAmount, status, customer);
+		result = prime * result + Objects.hash(collateral, creditLimitFactor, customer, id, loanAmount, status);
 		return result;
 	}
 
@@ -124,17 +135,16 @@ public class LoanApplication extends BaseEntity {
 			return false;
 		LoanApplication other = (LoanApplication) obj;
 		return Double.doubleToLongBits(collateral) == Double.doubleToLongBits(other.collateral)
-				&& Objects.equals(id, other.id)
+				&& Double.doubleToLongBits(creditLimitFactor) == Double.doubleToLongBits(other.creditLimitFactor)
+				&& Objects.equals(customer, other.customer) && Objects.equals(id, other.id)
 				&& Double.doubleToLongBits(loanAmount) == Double.doubleToLongBits(other.loanAmount)
-				&& status == other.status && Objects.equals(customer, other.customer);
+				&& status == other.status;
 	}
 
 	@Override
 	public String toString() {
 		return "LoanApplication [id=" + id + ", customer=" + customer + ", loanAmount=" + loanAmount + ", collateral="
-				+ collateral + ", status=" + status + "]";
+				+ collateral + ", status=" + status + ", creditLimitFactor=" + creditLimitFactor + "]";
 	}
-	
-	
 	
 }

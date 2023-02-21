@@ -24,6 +24,9 @@ public class UpdateCustomerRequest {
 	@Column(unique = true)
 	private String phoneNumber;
 
+	public UpdateCustomerRequest() {
+	}
+
 	public UpdateCustomerRequest(@Email(message = "Please enter valid email format") String email,
 			@NotNull(message = "Montly income is required.") @Min(value = 0, message = "Monthly income cannot be negative") double monthlyIncome,
 			@NotBlank(message = "Phone number is required.") @Pattern(regexp = "^[0-9]{10}", message = "length must 10 digits") String phoneNumber) {
@@ -81,6 +84,5 @@ public class UpdateCustomerRequest {
 		return "UpdateCustomerRequest [email=" + email + ", monthlyIncome=" + monthlyIncome + ", phoneNumber="
 				+ phoneNumber + "]";
 	}
-	
 	
 }

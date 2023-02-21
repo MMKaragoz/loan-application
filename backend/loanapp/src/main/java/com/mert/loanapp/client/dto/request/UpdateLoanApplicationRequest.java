@@ -9,10 +9,15 @@ public class UpdateLoanApplicationRequest {
 	@Min(value = 0, message = "Loan amount cannot be negative")
 	private double collateral;
 	
+	@Min(value = 0, message = "Credit Limit factor cannot be negative")
+	private double creditLimitFactor = 4;
+	
 	public UpdateLoanApplicationRequest() {}
 
-	public UpdateLoanApplicationRequest(@Min(value = 0, message = "Loan amount cannot be negative") double collateral) {
+	public UpdateLoanApplicationRequest(@Min(value = 0, message = "Loan amount cannot be negative") double collateral,
+			@Min(value = 0, message = "Credit Limit factor cannot be negative") double creditLimitFactor) {
 		this.collateral = collateral;
+		this.creditLimitFactor = creditLimitFactor;
 	}
 
 	public double getCollateral() {
@@ -23,9 +28,17 @@ public class UpdateLoanApplicationRequest {
 		this.collateral = collateral;
 	}
 
+	public double getCreditLimitFactor() {
+		return creditLimitFactor;
+	}
+
+	public void setCreditLimitFactor(double creditLimitFactor) {
+		this.creditLimitFactor = creditLimitFactor;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(collateral);
+		return Objects.hash(collateral, creditLimitFactor);
 	}
 
 	@Override
@@ -37,12 +50,16 @@ public class UpdateLoanApplicationRequest {
 		if (getClass() != obj.getClass())
 			return false;
 		UpdateLoanApplicationRequest other = (UpdateLoanApplicationRequest) obj;
-		return Double.doubleToLongBits(collateral) == Double.doubleToLongBits(other.collateral);
+		return Double.doubleToLongBits(collateral) == Double.doubleToLongBits(other.collateral)
+				&& Double.doubleToLongBits(creditLimitFactor) == Double.doubleToLongBits(other.creditLimitFactor);
 	}
 
 	@Override
 	public String toString() {
-		return "UpdateLoanApplicationRequest [collateral=" + collateral + "]";
+		return "UpdateLoanApplicationRequest [collateral=" + collateral + ", creditLimitFactor=" + creditLimitFactor
+				+ "]";
 	}
+	
+	
 	
 }

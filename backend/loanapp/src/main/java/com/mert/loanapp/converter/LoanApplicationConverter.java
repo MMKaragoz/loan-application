@@ -15,6 +15,7 @@ public class LoanApplicationConverter {
 		loanApplicationDto.setLoanAmount(loanApplication.getLoanAmount());
 		loanApplicationDto.setCollateral(loanApplication.getCollateral());
 		loanApplicationDto.setStatus(loanApplication.getStatus());
+		loanApplicationDto.setCreditLimitFactor(loanApplication.getCreditLimitFactor());
 		return loanApplicationDto;
 	}
 	

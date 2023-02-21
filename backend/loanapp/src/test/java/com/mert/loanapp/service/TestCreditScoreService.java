@@ -11,14 +11,14 @@ import com.mert.loanapp.service.impl.CreditScoreServiceImpl;
 
 public class TestCreditScoreService {
 
-private CreditScoreService creditScoreService;
+	private CreditScoreService creditScoreService;
 	
 	@BeforeEach
 	void setUp() {
 		creditScoreService = new CreditScoreServiceImpl();
 	}
 	
-	@DisplayName("test generateRandomCreditScore")
+	@DisplayName("test generateRandomCreditScore when called should return an integer value which is between 1 and 1900.")
 	@Test
 	void testGenerateRandomCreditScore_whenCalled_shouldReturnIntegerValueWhichIsBetween1And1900() {
 		int creditScore = creditScoreService.getRandomCreditScore();
@@ -26,7 +26,7 @@ private CreditScoreService creditScoreService;
 		
 	}
 	
-	@DisplayName("test getRandomCreditScore")
+	@DisplayName("test getRandomCreditScore when called should return an integer value which is between 1 and 1900.")
 	@Test
 	void testGetRandomCreditScore_whenCalled_shouldReturnIntegerValueWhichIsBetween1And1900() {
 		int creditScore = creditScoreService.getRandomCreditScore();

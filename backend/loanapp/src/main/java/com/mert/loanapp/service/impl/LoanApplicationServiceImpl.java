@@ -41,6 +41,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 		Customer customer = customerService.findById(request.getCustomerId());
 		loanApplication.setCustomer(customer);
 		loanApplication.setCollateral(request.getCollateral());
+		loanApplication.setCreditLimitFactor(request.getCreditLimitFactor());
 		
 		loanApplicationEvaluatorService.evaluateLoanApplication(loanApplication);
 		loanApplicationRepository.save(loanApplication);
@@ -68,6 +69,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 	public LoanApplicationDto update(String id, @Valid UpdateLoanApplicationRequest request) {
 		LoanApplication loanApplication = findById(id);
 		loanApplication.setCollateral(request.getCollateral());
+		loanApplication.setCreditLimitFactor(request.getCreditLimitFactor());
 		
 		loanApplication = loanApplicationRepository.save(loanApplication);
 		LoanApplicationDto loanApplicationDto = converter.convertLoanApplicationToLoanApplicationDto(loanApplication);

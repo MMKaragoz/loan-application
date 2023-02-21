@@ -16,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -70,6 +71,8 @@ public class Customer extends BaseEntity {
 	@Past(message = "Birth date cannot be later than today.")
 	private LocalDate birthDate;
 	
+	@Min(value = 0, message = "Credit score cannot be negative.")
+	@Max(value = 1900, message = "Credit score cannot be greater than 1900.")
 	private int creditScore;
 	
 	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, orphanRemoval = true)

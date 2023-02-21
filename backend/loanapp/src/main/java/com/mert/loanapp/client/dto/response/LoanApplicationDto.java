@@ -11,6 +11,8 @@ public class LoanApplicationDto extends BaseResponseDto {
 	private double collateral;
 	
 	private LoanStatus status;
+	
+	private double creditLimitFactor;
 
 	public LoanApplicationDto() {
 	}
@@ -39,11 +41,19 @@ public class LoanApplicationDto extends BaseResponseDto {
 		this.status = status;
 	}
 
+	public double getCreditLimitFactor() {
+		return creditLimitFactor;
+	}
+
+	public void setCreditLimitFactor(double creditLimitFactor) {
+		this.creditLimitFactor = creditLimitFactor;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(collateral, loanAmount, status);
+		result = prime * result + Objects.hash(collateral, creditLimitFactor, loanAmount, status);
 		return result;
 	}
 
@@ -57,6 +67,7 @@ public class LoanApplicationDto extends BaseResponseDto {
 			return false;
 		LoanApplicationDto other = (LoanApplicationDto) obj;
 		return Double.doubleToLongBits(collateral) == Double.doubleToLongBits(other.collateral)
+				&& creditLimitFactor == other.creditLimitFactor
 				&& Double.doubleToLongBits(loanAmount) == Double.doubleToLongBits(other.loanAmount)
 				&& status == other.status;
 	}
@@ -64,7 +75,9 @@ public class LoanApplicationDto extends BaseResponseDto {
 	@Override
 	public String toString() {
 		return "LoanApplicationDto [loanAmount=" + loanAmount + ", collateral=" + collateral + ", status=" + status
-				+ "]";
+				+ ", creditLimitFactor=" + creditLimitFactor + "]";
 	}
+
+	
 	
 }
