@@ -1,12 +1,10 @@
-import logo from "./logo.svg";
 import "./App.css";
+import LoanApplicationHomePage from "./components/LoanApplication/LoanApplicationHomePage";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>Welcome to the loan application</p>
-      </header>
+      <LoanApplicationHomePage />
     </div>
   );
 }
