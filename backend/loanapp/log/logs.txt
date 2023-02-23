@@ -1,0 +1,85 @@
+2023-02-23T20:14:26.712+03:00  INFO 9184 --- [restartedMain] com.mert.loanapp.LoanappApplication      : Starting LoanappApplication using Java 17.0.6 with PID 9184 (C:\Users\mmert\patika-DefineX\loan-application\backend\loanapp\target\classes started by mmert in C:\Users\mmert\patika-DefineX\loan-application\backend\loanapp)
+2023-02-23T20:14:26.717+03:00  INFO 9184 --- [restartedMain] com.mert.loanapp.LoanappApplication      : No active profile set, falling back to 1 default profile: "default"
+2023-02-23T20:14:26.799+03:00  INFO 9184 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-02-23T20:14:26.800+03:00  INFO 9184 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-02-23T20:14:28.269+03:00  INFO 9184 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-23T20:14:28.394+03:00  INFO 9184 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 103 ms. Found 2 JPA repository interfaces.
+2023-02-23T20:14:29.825+03:00  INFO 9184 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-02-23T20:14:29.849+03:00  INFO 9184 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-02-23T20:14:29.850+03:00  INFO 9184 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-02-23T20:14:29.986+03:00  INFO 9184 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-02-23T20:14:29.987+03:00  INFO 9184 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3186 ms
+2023-02-23T20:14:30.281+03:00  INFO 9184 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-23T20:14:30.365+03:00  INFO 9184 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-02-23T20:14:30.685+03:00  WARN 9184 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-02-23T20:14:30.887+03:00  INFO 9184 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-02-23T20:14:31.344+03:00  INFO 9184 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@18dbeace
+2023-02-23T20:14:31.348+03:00  INFO 9184 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-02-23T20:14:31.455+03:00  INFO 9184 --- [restartedMain] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-02-23T20:14:32.890+03:00  INFO 9184 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-23T20:14:32.911+03:00  INFO 9184 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-23T20:14:33.861+03:00  WARN 9184 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-23T20:14:35.653+03:00  INFO 9184 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-02-23T20:14:35.776+03:00  INFO 9184 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-02-23T20:14:35.804+03:00  INFO 9184 --- [restartedMain] com.mert.loanapp.LoanappApplication      : Started LoanappApplication in 9.764 seconds (process running for 10.489)
+2023-02-23T20:14:36.136+03:00  INFO 9184 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-02-23T20:14:36.137+03:00  INFO 9184 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-02-23T20:14:36.139+03:00  INFO 9184 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-02-23T20:14:36.424+03:00  INFO 9184 --- [http-nio-8080-exec-1] com.mert.loanapp.aop.LoggingAspect       : calling method: CustomerController.create(..)
+2023-02-23T20:14:36.425+03:00  INFO 9184 --- [http-nio-8080-exec-1] com.mert.loanapp.aop.LoggingAspect       : argument: CreateCustomerRequest [idNumber=12315078500, name=na4, surname=surname4, email=ema580a@a, monthlyIncome=7000.0, phoneNumber=1202520802, birthDate=2023-02-10]
+2023-02-23T20:14:36.450+03:00  INFO 9184 --- [http-nio-8080-exec-1] com.mert.loanapp.aop.LoggingAspect       : calling method: CustomerServiceImpl.create(..)
+2023-02-23T20:14:36.451+03:00  INFO 9184 --- [http-nio-8080-exec-1] com.mert.loanapp.aop.LoggingAspect       : argument: CreateCustomerRequest [idNumber=12315078500, name=na4, surname=surname4, email=ema580a@a, monthlyIncome=7000.0, phoneNumber=1202520802, birthDate=2023-02-10]
+2023-02-23T20:14:36.452+03:00  INFO 9184 --- [http-nio-8080-exec-1] com.mert.loanapp.aop.LoggingAspect       : calling method: CustomerConverter.convertCustomerRequestToCustomer(..)
+2023-02-23T20:14:36.452+03:00  INFO 9184 --- [http-nio-8080-exec-1] com.mert.loanapp.aop.LoggingAspect       : argument: CreateCustomerRequest [idNumber=12315078500, name=na4, surname=surname4, email=ema580a@a, monthlyIncome=7000.0, phoneNumber=1202520802, birthDate=2023-02-10]
+2023-02-23T20:14:36.453+03:00  INFO 9184 --- [http-nio-8080-exec-1] com.mert.loanapp.aop.LoggingAspect       : calling method: CreditScoreServiceImpl.getRandomCreditScore()
+2023-02-23T20:14:36.453+03:00  INFO 9184 --- [http-nio-8080-exec-1] c.m.loanapp.service.CreditScoreService   : in creditScore
+2023-02-23T20:14:36.577+03:00  WARN 9184 --- [http-nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1062, SQLState: 23000
+2023-02-23T20:14:36.577+03:00 ERROR 9184 --- [http-nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Duplicate entry 'ema580a@a' for key 'customer.UK_dwk6cx0afu8bs9o4t536v1j5v'
+2023-02-23T20:14:36.669+03:00  WARN 9184 --- [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [customer.UK_dwk6cx0afu8bs9o4t536v1j5v]]
+2023-02-23T20:19:24.869+03:00  INFO 9184 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-02-23T20:19:24.895+03:00  INFO 9184 --- [Thread-5] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-02-23T20:19:24.898+03:00  INFO 9184 --- [Thread-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-02-23T20:19:24.908+03:00  INFO 9184 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-02-23T20:19:24.936+03:00  INFO 9184 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-02-23T20:19:24.960+03:00  INFO 9184 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-02-23T20:19:25.110+03:00  INFO 9184 --- [restartedMain] com.mert.loanapp.LoanappApplication      : Starting LoanappApplication using Java 17.0.6 with PID 9184 (C:\Users\mmert\patika-DefineX\loan-application\backend\loanapp\target\classes started by mmert in C:\Users\mmert\patika-DefineX\loan-application\backend\loanapp)
+2023-02-23T20:19:25.111+03:00  INFO 9184 --- [restartedMain] com.mert.loanapp.LoanappApplication      : No active profile set, falling back to 1 default profile: "default"
+2023-02-23T20:19:25.558+03:00  INFO 9184 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-23T20:19:25.586+03:00  INFO 9184 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 27 ms. Found 2 JPA repository interfaces.
+2023-02-23T20:19:25.836+03:00  INFO 9184 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-02-23T20:19:25.837+03:00  INFO 9184 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-02-23T20:19:25.838+03:00  INFO 9184 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-02-23T20:19:25.887+03:00  INFO 9184 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-02-23T20:19:25.888+03:00  INFO 9184 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 772 ms
+2023-02-23T20:19:26.012+03:00  INFO 9184 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-23T20:19:26.021+03:00  WARN 9184 --- [restartedMain] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-02-23T20:19:26.029+03:00  INFO 9184 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2023-02-23T20:19:26.050+03:00  INFO 9184 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@445ec411
+2023-02-23T20:19:26.050+03:00  INFO 9184 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2023-02-23T20:19:26.052+03:00  INFO 9184 --- [restartedMain] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-02-23T20:19:26.192+03:00  INFO 9184 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-23T20:19:26.193+03:00  INFO 9184 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-23T20:19:26.719+03:00  WARN 9184 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-23T20:19:27.775+03:00  INFO 9184 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-02-23T20:19:27.789+03:00  INFO 9184 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-02-23T20:19:27.797+03:00  INFO 9184 --- [restartedMain] com.mert.loanapp.LoanappApplication      : Started LoanappApplication in 2.76 seconds (process running for 302.482)
+2023-02-23T20:19:27.801+03:00  INFO 9184 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-02-23T20:19:57.006+03:00  INFO 9184 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-02-23T20:19:57.007+03:00  INFO 9184 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-02-23T20:19:57.009+03:00  INFO 9184 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-02-23T20:19:57.060+03:00  INFO 9184 --- [http-nio-8080-exec-2] com.mert.loanapp.aop.LoggingAspect       : calling method: CustomerController.create(..)
+2023-02-23T20:19:57.061+03:00  INFO 9184 --- [http-nio-8080-exec-2] com.mert.loanapp.aop.LoggingAspect       : argument: CreateCustomerRequest [idNumber=12315070550, name=na4, surname=surname4, email=em40a@a, monthlyIncome=7000.0, phoneNumber=1202050802, birthDate=2023-02-10]
+2023-02-23T20:19:57.072+03:00  INFO 9184 --- [http-nio-8080-exec-2] com.mert.loanapp.aop.LoggingAspect       : calling method: CustomerServiceImpl.create(..)
+2023-02-23T20:19:57.072+03:00  INFO 9184 --- [http-nio-8080-exec-2] com.mert.loanapp.aop.LoggingAspect       : argument: CreateCustomerRequest [idNumber=12315070550, name=na4, surname=surname4, email=em40a@a, monthlyIncome=7000.0, phoneNumber=1202050802, birthDate=2023-02-10]
+2023-02-23T20:19:57.073+03:00  INFO 9184 --- [http-nio-8080-exec-2] com.mert.loanapp.aop.LoggingAspect       : calling method: CustomerConverter.convertCustomerRequestToCustomer(..)
+2023-02-23T20:19:57.073+03:00  INFO 9184 --- [http-nio-8080-exec-2] com.mert.loanapp.aop.LoggingAspect       : argument: CreateCustomerRequest [idNumber=12315070550, name=na4, surname=surname4, email=em40a@a, monthlyIncome=7000.0, phoneNumber=1202050802, birthDate=2023-02-10]
+2023-02-23T20:19:57.073+03:00  INFO 9184 --- [http-nio-8080-exec-2] com.mert.loanapp.aop.LoggingAspect       : returning from method: CustomerConverter.convertCustomerRequestToCustomer(..)
+2023-02-23T20:19:57.074+03:00  INFO 9184 --- [http-nio-8080-exec-2] com.mert.loanapp.aop.LoggingAspect       : result: Customer [id=null, idNumber=12315070550, name=na4, surname=surname4, fullName=null, email=em40a@a, monthlyIncome=7000.0, phoneNumber=1202050802, birthDate=2023-02-10, creditScore=0, loanApplications=null]
+2023-02-23T20:19:57.075+03:00  INFO 9184 --- [http-nio-8080-exec-2] com.mert.loanapp.aop.LoggingAspect       : calling method: CreditScoreServiceImpl.getRandomCreditScore()
+2023-02-23T20:19:57.075+03:00  INFO 9184 --- [http-nio-8080-exec-2] c.m.loanapp.service.CreditScoreService   : in creditScore
+2023-02-23T20:19:57.076+03:00  INFO 9184 --- [http-nio-8080-exec-2] com.mert.loanapp.aop.LoggingAspect       : returning from method: CreditScoreServiceImpl.getRandomCreditScore()
+2023-02-23T20:19:57.077+03:00  INFO 9184 --- [http-nio-8080-exec-2] com.mert.loanapp.aop.LoggingAspect       : result: 309
+2023-02-23T20:19:57.080+03:00  INFO 9184 --- [http-nio-8080-exec-2] com.mert.loanapp.aop.LoggingAspect       : returning from method: CustomerServiceImpl.create(..)
+2023-02-23T20:19:57.081+03:00  INFO 9184 --- [http-nio-8080-exec-2] com.mert.loanapp.aop.LoggingAspect       : result: null
+2023-02-23T20:19:57.154+03:00  INFO 9184 --- [http-nio-8080-exec-2] com.mert.loanapp.aop.LoggingAspect       : returning from method: CustomerController.create(..)
+2023-02-23T20:19:57.155+03:00  INFO 9184 --- [http-nio-8080-exec-2] com.mert.loanapp.aop.LoggingAspect       : result: <200 OK OK,Customer has been created successfully.,[]>
