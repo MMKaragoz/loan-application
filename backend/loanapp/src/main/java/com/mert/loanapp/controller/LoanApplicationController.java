@@ -18,6 +18,7 @@ import com.mert.loanapp.client.dto.request.UpdateLoanApplicationRequest;
 import com.mert.loanapp.client.dto.response.LoanApplicationDto;
 import com.mert.loanapp.service.LoanApplicationService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 
 @RestController
@@ -31,6 +32,7 @@ public class LoanApplicationController {
 		this.loanApplicationService = loanApplicationService;
 	}
 	
+	@Operation(summary = "Create a loan application")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<String> create(@Valid @RequestBody CreateLoanApplicationRequest request) {
@@ -39,18 +41,21 @@ public class LoanApplicationController {
 		return ResponseEntity.ok(response);
 	}
 	
+	@Operation(summary = "Get a loan application by id")
 	@GetMapping("/{id}")
 	public ResponseEntity<LoanApplicationDto> getById(@PathVariable("id") String id) {
 		LoanApplicationDto response = loanApplicationService.getById(id);
 		return ResponseEntity.ok(response);
 	}
 	
+	@Operation(summary = "Update a loan application by id")
 	@PutMapping("/{id}")
 	public ResponseEntity<LoanApplicationDto> update(@PathVariable("id") String id, @Valid @RequestBody UpdateLoanApplicationRequest request) {
 		LoanApplicationDto response = loanApplicationService.update(id, request);
 		return ResponseEntity.ok(response);
 	}
 	
+	@Operation(summary = "Delete a loan application by id")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable("id") String id) {
 		loanApplicationService.delete(id);
