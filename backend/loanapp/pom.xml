@@ -58,6 +58,12 @@
     		<version>2.0.2</version>
 		</dependency>
 		
+		<!-- AOP -->
+		<dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-aop</artifactId>
+	    </dependency>
+		
 		<!-- Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
