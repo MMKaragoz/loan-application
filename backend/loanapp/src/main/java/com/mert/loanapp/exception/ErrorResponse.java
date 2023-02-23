@@ -1,6 +1,7 @@
 package com.mert.loanapp.exception;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.http.HttpStatus;
@@ -11,13 +12,12 @@ public class ErrorResponse {
 	
 	private HttpStatus status;
 
-	private String message;
-	
+	private List<CustomFieldError> errors;
 
-	public ErrorResponse(Date timestamp, HttpStatus status, String message) {
+	public ErrorResponse(Date timestamp, HttpStatus status, List<CustomFieldError> errors) {
 		this.timestamp = timestamp;
 		this.status = status;
-		this.message = message;
+		this.errors = errors;
 	}
 
 	public Date getTimestamp() {
@@ -36,17 +36,17 @@ public class ErrorResponse {
 		this.status = status;
 	}
 
-	public String getMessage() {
-		return message;
+	public List<CustomFieldError> getMessage() {
+		return errors;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setMessage(List<CustomFieldError> errors) {
+		this.errors = errors;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(message, status, timestamp);
+		return Objects.hash(errors, status, timestamp);
 	}
 
 	@Override
@@ -58,13 +58,13 @@ public class ErrorResponse {
 		if (getClass() != obj.getClass())
 			return false;
 		ErrorResponse other = (ErrorResponse) obj;
-		return Objects.equals(message, other.message) && status == other.status
+		return Objects.equals(errors, other.errors) && status == other.status
 				&& Objects.equals(timestamp, other.timestamp);
 	}
 
 	@Override
 	public String toString() {
-		return "ErrorResponse [timestamp=" + timestamp + ", status=" + status + ", message=" + message + "]";
+		return "ErrorResponse [timestamp=" + timestamp + ", status=" + status + ", errors=" + errors + "]";
 	}
 	
 }

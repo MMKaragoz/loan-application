@@ -15,7 +15,7 @@ import jakarta.validation.constraints.Size;
 public class CreateCustomerRequest {
 	
 	@NotBlank(message = "ID Number is required.")
-	@Pattern(regexp = "^[0-9]{10}[02468]$", message = "Id number must only be numbers, the length must be 11 and last digit must be even")
+	@Pattern(regexp = "^[0-9]{10}[02468]$", message = "Id Number must only be numbers, the length must be 11 and last digit must be even")
 	@Column(unique = true)
 	private String idNumber;
 	

@@ -22,11 +22,17 @@ const steps = [
   "Review the application",
 ];
 
-function getStepContent(step, formData, setFormData) {
+function getStepContent(step, formData, setFormData, errors) {
   switch (step) {
     case 0:
       console.log(formData);
-      return <IDInformation formData={formData} setFormData={setFormData} />;
+      return (
+        <IDInformation
+          formData={formData}
+          setFormData={setFormData}
+          errors={errors}
+        />
+      );
     case 1:
       return <PersonalDetails formData={formData} setFormData={setFormData} />;
     case 2:
@@ -55,6 +61,7 @@ const PersonalLoanApplication = () => {
     amountOfLoan: "",
     collateral: "",
   });
+  const [errors, setErrors] = useState([]);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -77,7 +84,10 @@ const PersonalLoanApplication = () => {
       console.log(data);
       await axios.post("/customers", data);
     } catch (error) {
-      console.error(error);
+      if (error.response) {
+        console.log(error.response.data.message);
+        setErrors(error.response.data.message);
+      }
     }
   };
 
@@ -104,7 +114,7 @@ const PersonalLoanApplication = () => {
               ))}
             </Stepper>
             <React.Fragment>
-              {getStepContent(activeStep, formData, setFormData)}
+              {getStepContent(activeStep, formData, setFormData, errors)}
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>

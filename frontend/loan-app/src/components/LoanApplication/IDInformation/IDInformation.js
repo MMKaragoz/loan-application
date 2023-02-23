@@ -48,12 +48,19 @@ const IDInformation = (props) => {
             variant="standard"
             value={idNumber}
             onChange={handleIdNumberChange}
+            error={idNumber !== "" && !idNumber.match("^[0-9]{10}[02468]$")}
+            helperText={
+              idNumber !== "" && !idNumber.match("^[0-9]{10}[02468]$")
+                ? "Id Number must only be numbers, the length must be 11 and last digit must be even."
+                : " "
+            }
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <TextField
             required
-            id="birthDate"
+            type="date"
+            id="standard-size-small"
             name="birthDate"
             label="Birth Date"
             fullWidth
