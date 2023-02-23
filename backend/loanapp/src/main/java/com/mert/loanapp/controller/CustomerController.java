@@ -18,6 +18,7 @@ import com.mert.loanapp.client.dto.request.UpdateCustomerRequest;
 import com.mert.loanapp.client.dto.response.CustomerDto;
 import com.mert.loanapp.service.CustomerService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 
 @RestController
@@ -31,6 +32,7 @@ public class CustomerController {
 		this.customerService = customerService;
 	}
 	
+	@Operation(summary = "Create a new customer")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<String> create(@Valid @RequestBody CreateCustomerRequest request) {
@@ -39,18 +41,21 @@ public class CustomerController {
 		return ResponseEntity.ok(response);
 	}
 	
+	@Operation(summary = "Get a customer by id")
 	@GetMapping("/{id}")
 	public ResponseEntity<CustomerDto> getById(@PathVariable("id") String id) {
 		CustomerDto response = customerService.getById(id);
 		return ResponseEntity.ok(response);
 	}
 	
+	@Operation(summary = "Update a customer by id")
 	@PutMapping("/{id}")
 	public ResponseEntity<CustomerDto> update(@PathVariable("id") String id, @Valid @RequestBody UpdateCustomerRequest request) {
 		CustomerDto response = customerService.update(id, request);
 		return ResponseEntity.ok(response);
 	}
 	
+	@Operation(summary = "Delete a customer by id")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable("id") String id) {
 		customerService.delete(id);
