@@ -9,7 +9,7 @@ import jakarta.validation.Valid;
 
 public interface CustomerService {
 
-	void create(@Valid CreateCustomerRequest request);
+	Customer create(@Valid CreateCustomerRequest request);
 	
 	Customer findById(String id);
 

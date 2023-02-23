@@ -1,11 +1,3 @@
-import {
-  Button,
-  Paper,
-  Step,
-  StepLabel,
-  Stepper,
-  Typography,
-} from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Box, Container } from "@mui/system";
 import axios from "axios";
@@ -14,6 +6,15 @@ import IDInformation from "./IDInformation/IDInformation";
 import LoanApplicationDetails from "./LoanApplicationDetails/LoanApplicationDetails";
 import PersonalDetails from "./PersonalDetails/PersonalDetails";
 import ReviewLoanApplication from "./ReviewLoanApplication/ReviewLoanApplication";
+import {
+  Button,
+  Paper,
+  Step,
+  StepLabel,
+  Stepper,
+  Typography,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const steps = [
   "ID Information",
@@ -25,7 +26,6 @@ const steps = [
 function getStepContent(step, formData, setFormData, errors) {
   switch (step) {
     case 0:
-      console.log(formData);
       return (
         <IDInformation
           formData={formData}
@@ -42,14 +42,13 @@ function getStepContent(step, formData, setFormData, errors) {
     case 3:
       return <ReviewLoanApplication formData={formData} />;
     default:
-      throw new Error("Unknown step");
   }
 }
 
 const theme = createTheme();
 
 const PersonalLoanApplication = () => {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState({
     idNumber: "",
     birthDate: "",
@@ -62,16 +61,19 @@ const PersonalLoanApplication = () => {
     collateral: "",
   });
   const [errors, setErrors] = useState([]);
+  const navigate = useNavigate();
 
-  const handleNext = () => {
+  const handleNext = async () => {
     setActiveStep(activeStep + 1);
     if (activeStep === steps.length - 1) {
-      createCustomer();
+      const customerId = await createCustomer();
+      await createLoanApplication(customerId);
+      navigate("/");
     }
   };
 
   const createCustomer = async () => {
-    const data = {
+    const createCustomerRequest = {
       idNumber: formData.idNumber,
       name: formData.name,
       surname: formData.surname,
@@ -81,11 +83,25 @@ const PersonalLoanApplication = () => {
       birthDate: formData.birthDate,
     };
     try {
-      console.log(data);
-      await axios.post("/customers", data);
+      const response = await axios.post("/customers", createCustomerRequest);
+      return response.data.customerId;
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.message);
+        setErrors(error.response.data.message);
+      }
+    }
+  };
+
+  const createLoanApplication = async (customerId) => {
+    const createLoanApplicationRequest = {
+      customerId: customerId,
+      collateral: parseInt(formData.collateral),
+      creditLimitFactor: 4,
+    };
+    try {
+      await axios.post("/loan-applications", createLoanApplicationRequest);
+    } catch (error) {
+      if (error.response) {
         setErrors(error.response.data.message);
       }
     }

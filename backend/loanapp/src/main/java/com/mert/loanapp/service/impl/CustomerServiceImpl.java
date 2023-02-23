@@ -30,10 +30,10 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	@Transactional
-	public void create(@Valid CreateCustomerRequest request) {
+	public Customer create(@Valid CreateCustomerRequest request) {
 		Customer customer = converter.convertCustomerRequestToCustomer(request);
 		customer.setCreditScore(creditScoreService.getRandomCreditScore());
-		customerRepository.save(customer);
+		return customerRepository.save(customer);
 	}
 	
 	@Override

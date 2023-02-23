@@ -1,5 +1,8 @@
 package com.mert.loanapp.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mert.loanapp.client.dto.request.CreateCustomerRequest;
 import com.mert.loanapp.client.dto.request.UpdateCustomerRequest;
 import com.mert.loanapp.client.dto.response.CustomerDto;
+import com.mert.loanapp.model.Customer;
 import com.mert.loanapp.service.CustomerService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,9 +39,10 @@ public class CustomerController {
 	@Operation(summary = "Create a new customer")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<String> create(@Valid @RequestBody CreateCustomerRequest request) {
-		customerService.create(request);
-		String response = "Customer has been created successfully.";
+	public ResponseEntity<Map<String, String>> create(@Valid @RequestBody CreateCustomerRequest request) {
+		Map<String, String> response = new HashMap<>();
+		Customer customer = customerService.create(request);
+		response.put("customerId", customer.getId());
 		return ResponseEntity.ok(response);
 	}
 	
