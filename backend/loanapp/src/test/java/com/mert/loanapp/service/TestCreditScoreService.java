@@ -18,17 +18,17 @@ public class TestCreditScoreService {
 		creditScoreService = new CreditScoreServiceImpl();
 	}
 	
-	@DisplayName("test generateRandomCreditScore when called should return an integer value which is between 1 and 1900.")
+	@DisplayName("test generateRandomCreditScore should return an integer value which is between 1 and 1900 when called")
 	@Test
-	void testGenerateRandomCreditScore_whenCalled_shouldReturnIntegerValueWhichIsBetween1And1900() {
+	void testGenerateRandomCreditScore_shouldReturnIntegerValueWhichIsBetween1And1900_whenCalled() {
 		int creditScore = creditScoreService.getRandomCreditScore();
 		assertTrue(creditScore >= 1 && creditScore <= 1900);
 		
 	}
 	
-	@DisplayName("test getRandomCreditScore when called should return an integer value which is between 1 and 1900.")
+	@DisplayName("test getRandomCreditScore should return an integer value which is between 1 and 1900 when called")
 	@Test
-	void testGetRandomCreditScore_whenCalled_shouldReturnIntegerValueWhichIsBetween1And1900() {
+	void testGetRandomCreditScore_shouldReturnIntegerValueWhichIsBetween1And1900_whenCalled() {
 		int creditScore = creditScoreService.getRandomCreditScore();
 		assertTrue(creditScore >= 1 && creditScore <= 1900);
 	}

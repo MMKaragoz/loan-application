@@ -18,6 +18,7 @@ import com.mert.loanapp.repository.LoanApplicationRepository;
 import com.mert.loanapp.service.CustomerService;
 import com.mert.loanapp.service.LoanApplicationEvaluatorService;
 import com.mert.loanapp.service.LoanApplicationService;
+import com.mert.loanapp.service.SMSService;
 
 import jakarta.validation.Valid;
 
@@ -28,14 +29,17 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 	private final LoanApplicationConverter converter;
 	private final CustomerService customerService;
 	private final LoanApplicationEvaluatorService loanApplicationEvaluatorService;
+	private final SMSService smsService;
 	
 	public LoanApplicationServiceImpl(LoanApplicationRepository loanApplicationRepository,
 			LoanApplicationConverter converter, CustomerService customerService,
-			LoanApplicationEvaluatorService loanApplicationEvaluatorService) {
+			LoanApplicationEvaluatorService loanApplicationEvaluatorService,
+			SMSService smsService) {
 		this.loanApplicationRepository = loanApplicationRepository;
 		this.converter = converter;
 		this.customerService = customerService;
 		this.loanApplicationEvaluatorService = loanApplicationEvaluatorService;
+		this.smsService = smsService;
 	}
 
 	@Override
@@ -49,7 +53,8 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 		loanApplication.setDesiredLoanAmount(request.getDesiredLoanAmount());
 		
 		loanApplicationEvaluatorService.evaluateLoanApplication(loanApplication);
-		loanApplicationRepository.save(loanApplication);
+		loanApplication = loanApplicationRepository.save(loanApplication);
+		smsService.sendResultOfLoanApplication(customer.getFullName(), loanApplication.getStatus(), loanApplication.getDesiredLoanAmount(), customer.getPhoneNumber());
 		
 	}
 	
