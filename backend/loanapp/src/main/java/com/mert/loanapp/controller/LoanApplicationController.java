@@ -1,5 +1,8 @@
 package com.mert.loanapp.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +24,10 @@ import com.mert.loanapp.service.LoanApplicationService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
 
 @RestController
 @RequestMapping("api/v1/loan-applications")
@@ -60,6 +68,15 @@ public class LoanApplicationController {
 	public ResponseEntity<String> delete(@PathVariable("id") String id) {
 		loanApplicationService.delete(id);
 		String response = "Loan application deleted successfully ";
+		return ResponseEntity.ok(response);
+	}
+	
+	@Operation(summary = "Get all loan applications by ID Number and Birth Date")
+	@GetMapping("/result")
+	public ResponseEntity<List<LoanApplicationDto>> getAllByIdNumberAndBirthDate(@RequestParam("idNumber") @NotBlank(message = "ID Number is required.")
+	@Pattern(regexp = "^[0-9]{10}[02468]$", message = "must only be numbers, the length must be 11 and last digit must be even") String idNumber, 
+	@RequestParam("birthDate") @NotNull(message = "Birth date is required.") @Past(message = "Birth date cannot be later than today.") LocalDate birthDate) {
+		List<LoanApplicationDto> response = loanApplicationService.getAllByIdNumberAndBirthDate(idNumber, birthDate);
 		return ResponseEntity.ok(response);
 	}
 }

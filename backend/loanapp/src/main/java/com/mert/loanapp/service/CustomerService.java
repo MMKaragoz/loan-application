@@ -1,5 +1,7 @@
 package com.mert.loanapp.service;
 
+import java.time.LocalDate;
+
 import com.mert.loanapp.client.dto.request.CreateCustomerRequest;
 import com.mert.loanapp.client.dto.request.UpdateCustomerRequest;
 import com.mert.loanapp.client.dto.response.CustomerDto;
@@ -18,5 +20,7 @@ public interface CustomerService {
 	CustomerDto update(String id, @Valid UpdateCustomerRequest request);
 
 	void delete(String id);
+
+	CustomerDto getByIdNumberAndBirthDate(String idNumber, LocalDate birthDate);
 
 }

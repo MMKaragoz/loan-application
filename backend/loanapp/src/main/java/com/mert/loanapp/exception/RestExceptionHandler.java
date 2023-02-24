@@ -32,7 +32,6 @@ public class RestExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
 
-	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException exception, WebRequest request) {
 	    // Get the list of validation errors from the exception
@@ -54,5 +53,18 @@ public class RestExceptionHandler {
 
 	    // Return the error response with a bad request status code
 	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+	}
+	
+	@ExceptionHandler(NotFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException exception) {
+		String message = exception.getMessage();
+		
+		ErrorResponse response = new ErrorResponse(
+                new Date(),
+                HttpStatus.NOT_FOUND,
+                message
+         );
+		 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 	}
 }

@@ -1,5 +1,8 @@
 package com.mert.loanapp.service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import com.mert.loanapp.client.dto.request.CreateLoanApplicationRequest;
 import com.mert.loanapp.client.dto.request.UpdateLoanApplicationRequest;
 import com.mert.loanapp.client.dto.response.LoanApplicationDto;
@@ -18,4 +21,8 @@ public interface LoanApplicationService {
 	LoanApplicationDto update(String id, @Valid UpdateLoanApplicationRequest request);
 
 	void delete(String id);
+
+	List<LoanApplicationDto> getAllByIdNumberAndBirthDate(
+			String idNumber,
+			LocalDate birthDate);
 }

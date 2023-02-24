@@ -1,10 +1,14 @@
 package com.mert.loanapp.service.impl;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mert.loanapp.client.dto.request.CreateLoanApplicationRequest;
 import com.mert.loanapp.client.dto.request.UpdateLoanApplicationRequest;
+import com.mert.loanapp.client.dto.response.CustomerDto;
 import com.mert.loanapp.client.dto.response.LoanApplicationDto;
 import com.mert.loanapp.converter.LoanApplicationConverter;
 import com.mert.loanapp.exception.NotFoundException;
@@ -83,6 +87,15 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 		findById(id);
 		loanApplicationRepository.deleteById(id);
 		
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<LoanApplicationDto> getAllByIdNumberAndBirthDate(String idNumber, LocalDate birthDate) {
+		CustomerDto customerDto = customerService.getByIdNumberAndBirthDate(idNumber, birthDate);
+		List<LoanApplicationDto> loanApplications = customerDto.getLoanApplications();
+		
+		return loanApplications;
 	}
 
 }

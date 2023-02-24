@@ -13,11 +13,19 @@ public class ErrorResponse {
 	private HttpStatus status;
 
 	private List<CustomFieldError> errors;
+	
+	private String message;
 
 	public ErrorResponse(Date timestamp, HttpStatus status, List<CustomFieldError> errors) {
 		this.timestamp = timestamp;
 		this.status = status;
 		this.errors = errors;
+	}
+	
+	public ErrorResponse(Date timestamp, HttpStatus status, String message) {
+		this.timestamp = timestamp;
+		this.status = status;
+		this.message = message;
 	}
 
 	public Date getTimestamp() {
@@ -36,17 +44,25 @@ public class ErrorResponse {
 		this.status = status;
 	}
 
-	public List<CustomFieldError> getMessage() {
+	public List<CustomFieldError> getErrors() {
 		return errors;
 	}
 
-	public void setMessage(List<CustomFieldError> errors) {
+	public void setErrors(List<CustomFieldError> errors) {
 		this.errors = errors;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(errors, status, timestamp);
+		return Objects.hash(errors, message, status, timestamp);
 	}
 
 	@Override
@@ -58,13 +74,16 @@ public class ErrorResponse {
 		if (getClass() != obj.getClass())
 			return false;
 		ErrorResponse other = (ErrorResponse) obj;
-		return Objects.equals(errors, other.errors) && status == other.status
+		return Objects.equals(errors, other.errors) && Objects.equals(message, other.message) && status == other.status
 				&& Objects.equals(timestamp, other.timestamp);
 	}
 
 	@Override
 	public String toString() {
-		return "ErrorResponse [timestamp=" + timestamp + ", status=" + status + ", errors=" + errors + "]";
+		return "ErrorResponse [timestamp=" + timestamp + ", status=" + status + ", errors=" + errors + ", message="
+				+ message + "]";
 	}
+
+
 	
 }

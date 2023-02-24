@@ -1,5 +1,7 @@
 package com.mert.loanapp.service.impl;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,6 +72,16 @@ public class CustomerServiceImpl implements CustomerService {
 	public void delete(String id) {
 		findById(id);
 		customerRepository.deleteById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public CustomerDto getByIdNumberAndBirthDate(String idNumber, LocalDate birthDate) {
+		Customer customer = customerRepository.findByIdNumberAndBirthDate(idNumber, birthDate)
+				.orElseThrow(
+						() -> new NotFoundException("Customer could not find by ID Number: " + idNumber + " and Birth Date: " + birthDate) );
+		CustomerDto customerDto = converter.convertCustomerToCustomerDto(customer);
+		return customerDto;
 	}
 
 }

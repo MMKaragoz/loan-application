@@ -36,6 +36,7 @@ public class CustomerController {
 		this.customerService = customerService;
 	}
 	
+	
 	@Operation(summary = "Create a new customer")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
