@@ -3,11 +3,9 @@ import React, { useState } from "react";
 
 const LoanApplicationDetails = (props) => {
   const [amountOfLoan, setAmountOfLoan] = useState(
-    props.formData.amountOfLoan || 0.0
+    props.formData.amountOfLoan || ""
   );
-  const [collateral, setCollateral] = useState(
-    props.formData.collateral || 0.0
-  );
+  const [collateral, setCollateral] = useState(props.formData.collateral || "");
 
   const handleAmountOfLoanChange = (event) => {
     setAmountOfLoan(event.target.value);

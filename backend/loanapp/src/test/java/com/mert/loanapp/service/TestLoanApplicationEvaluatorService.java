@@ -65,7 +65,7 @@ public class TestLoanApplicationEvaluatorService {
 		
 		loanApplicationEvalutorService.evaluateLoanApplication(loanApplication);
 		double expected = 0;
-		double actual = loanApplication.getLoanAmount();
+		double actual = loanApplication.getMaxLoanAmount();
 		
 		assertEquals(expected, actual);
 	}
@@ -82,7 +82,7 @@ public class TestLoanApplicationEvaluatorService {
 		loanApplicationEvalutorService.evaluateLoanApplication(loanApplication);
 		
 		double expected = 10000 + loanApplication.getCollateral() * 0.1;
-		double actual = loanApplication.getLoanAmount();
+		double actual = loanApplication.getMaxLoanAmount();
 		assertEquals(expected, actual);
 	}
 	
@@ -98,7 +98,7 @@ public class TestLoanApplicationEvaluatorService {
 		loanApplicationEvalutorService.evaluateLoanApplication(loanApplication);
 		
 		double expected = 20000 + loanApplication.getCollateral() * 0.2;
-		double actual = loanApplication.getLoanAmount();
+		double actual = loanApplication.getMaxLoanAmount();
 		
 		assertEquals(expected, actual);
 	}
@@ -116,7 +116,7 @@ public class TestLoanApplicationEvaluatorService {
 		loanApplicationEvalutorService.evaluateLoanApplication(loanApplication);
 		
 		double expected = (customer.getMonthlyIncome() * creditLimitFactor / 2) + loanApplication.getCollateral() * 0.25;
-		double actual = loanApplication.getLoanAmount();
+		double actual = loanApplication.getMaxLoanAmount();
 		
 		assertEquals(expected, actual);
 	}
@@ -134,11 +134,43 @@ public class TestLoanApplicationEvaluatorService {
 		loanApplicationEvalutorService.evaluateLoanApplication(loanApplication);
 		
 		double expected = (customer.getMonthlyIncome() * creditLimitFactor) + loanApplication.getCollateral() * 0.5;
-		double actual = loanApplication.getLoanAmount();
+		double actual = loanApplication.getMaxLoanAmount();
 		
 		assertEquals(expected, actual);
 	}
 	
+	@DisplayName("testEvaluateLoanApplication update loan status DECLINED when maxAmount < desiredLoanAmount")
+	@ParameterizedTest
+	@CsvSource({"1750, 2500, 100000", "160, 3750, 1000000", "1900, 5850, 1000000", "1700, 2780, 1000000", "1500, 19900, 1000000"})
+	void testEvaluateLoanApplication_shouldUpdateLoanStatusDeclined_whenMaxAmountLessThanDesiredLoanAmount(int creditScore, int monthlyIncome, double desiredLoanAmount) {
+		LoanApplication loanApplication = UnitTestLoanApplicationSupport.generateLoanApplication("application-id", "user-id");
+		Customer customer = loanApplication.getCustomer();
+		customer.setCreditScore(creditScore);
+		customer.setMonthlyIncome(monthlyIncome);
+		loanApplication.setDesiredLoanAmount(desiredLoanAmount);
+		
+		loanApplicationEvalutorService.evaluateLoanApplication(loanApplication);
+		LoanStatus expected = LoanStatus.DECLINED;
+		LoanStatus actual = loanApplication.getStatus();
+	
+		assertEquals(expected, actual);
+	}
+	
+	@DisplayName("testEvaluateLoanApplication update loan status APPROVED when maxAmount >= desiredLoanAmount")
+	@ParameterizedTest
+	@CsvSource({"1750, 2500, 5000", "1600, 3750, 5000", "1900, 5850, 5000", "1700, 2780, 5000", "1500, 8990, 5000"})
+	void testEvaluateLoanApplication_shouldUpdateLoanStatusApproved_whenMaxAmountEqualToOrGreaterThanDesiredLoanAmount(int creditScore, int monthlyIncome, double desiredLoanAmount) {
+		LoanApplication loanApplication = UnitTestLoanApplicationSupport.generateLoanApplication("application-id", "user-id");
+		Customer customer = loanApplication.getCustomer();
+		customer.setCreditScore(creditScore);
+		customer.setMonthlyIncome(monthlyIncome);
+		
+		loanApplicationEvalutorService.evaluateLoanApplication(loanApplication);
+		LoanStatus expected = LoanStatus.APPROVED;
+		LoanStatus actual = loanApplication.getStatus();
+	
+		assertEquals(expected, actual);
+	}
 	
 	@AfterEach
 	void tearDown() {

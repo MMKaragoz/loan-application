@@ -1,28 +1,50 @@
 package com.mert.loanapp.client.dto.response;
 
+import java.util.Date;
 import java.util.Objects;
 
 import com.mert.loanapp.model.enums.LoanStatus;
 
 public class LoanApplicationDto extends BaseResponseDto {
 	
-	private double loanAmount;
+	private double maxLoanAmount;
+	
+	private double desiredLoanAmount;
 	
 	private double collateral;
 	
 	private LoanStatus status;
 	
 	private double creditLimitFactor;
-
+	
 	public LoanApplicationDto() {
+		
 	}
 
-	public double getLoanAmount() {
-		return loanAmount;
+	public LoanApplicationDto(Date createdAt, Date updatedAt, double maxLoanAmount, double desiredLoanAmount,
+			double collateral, LoanStatus status, double creditLimitFactor) {
+		super(createdAt, updatedAt);
+		this.maxLoanAmount = maxLoanAmount;
+		this.desiredLoanAmount = desiredLoanAmount;
+		this.collateral = collateral;
+		this.status = status;
+		this.creditLimitFactor = creditLimitFactor;
 	}
 
-	public void setLoanAmount(double loanAmount) {
-		this.loanAmount = loanAmount;
+	public double getMaxLoanAmount() {
+		return maxLoanAmount;
+	}
+
+	public void setMaxLoanAmount(double maxLoanAmount) {
+		this.maxLoanAmount = maxLoanAmount;
+	}
+
+	public double getDesiredLoanAmount() {
+		return desiredLoanAmount;
+	}
+
+	public void setDesiredLoanAmount(double desiredLoanAmount) {
+		this.desiredLoanAmount = desiredLoanAmount;
 	}
 
 	public double getCollateral() {
@@ -53,7 +75,7 @@ public class LoanApplicationDto extends BaseResponseDto {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(collateral, creditLimitFactor, loanAmount, status);
+		result = prime * result + Objects.hash(collateral, creditLimitFactor, desiredLoanAmount, maxLoanAmount, status);
 		return result;
 	}
 
@@ -67,17 +89,17 @@ public class LoanApplicationDto extends BaseResponseDto {
 			return false;
 		LoanApplicationDto other = (LoanApplicationDto) obj;
 		return Double.doubleToLongBits(collateral) == Double.doubleToLongBits(other.collateral)
-				&& creditLimitFactor == other.creditLimitFactor
-				&& Double.doubleToLongBits(loanAmount) == Double.doubleToLongBits(other.loanAmount)
+				&& Double.doubleToLongBits(creditLimitFactor) == Double.doubleToLongBits(other.creditLimitFactor)
+				&& Double.doubleToLongBits(desiredLoanAmount) == Double.doubleToLongBits(other.desiredLoanAmount)
+				&& Double.doubleToLongBits(maxLoanAmount) == Double.doubleToLongBits(other.maxLoanAmount)
 				&& status == other.status;
 	}
 
 	@Override
 	public String toString() {
-		return "LoanApplicationDto [loanAmount=" + loanAmount + ", collateral=" + collateral + ", status=" + status
-				+ ", creditLimitFactor=" + creditLimitFactor + "]";
+		return "LoanApplicationDto [maxLoanAmount=" + maxLoanAmount + ", desiredLoanAmount=" + desiredLoanAmount
+				+ ", collateral=" + collateral + ", status=" + status + ", creditLimitFactor=" + creditLimitFactor
+				+ "]";
 	}
-
-	
 	
 }

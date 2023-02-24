@@ -49,11 +49,13 @@ public class LoggingAspect {
 		String method = joinPoint.getSignature().toShortString();
 		logger.info("calling method: " + method);
 		
+		/*
 		// display the arguments to the method
 		Object[] args = joinPoint.getArgs();
 		for(Object arg: args) {
 			logger.info("argument: " + arg);
 		}
+		*/
 	}
 	
 	// add @AfterReturning advice
@@ -62,11 +64,13 @@ public class LoggingAspect {
 			returning= "result")
 	public void afterReturning(JoinPoint joinPoint, Object result) {
 		
+		
 		// display method we are returning
 		String method = joinPoint.getSignature().toShortString();
 		logger.info("returning from method: " + method);
-		
+		/*
 		// display data returned
 		logger.info("result: " + result );
+		*/
 	}
 }

@@ -9,7 +9,8 @@ public class UnitTestLoanApplicationSupport {
 		LoanApplication loanApplication = new LoanApplication();
 		loanApplication.setId(id);
 		loanApplication.setCustomer(UnitTestCustomerSupport.generateCustomer(userId));
-		loanApplication.setLoanAmount(0);
+		loanApplication.setDesiredLoanAmount(0);
+		loanApplication.setMaxLoanAmount(0);
 		loanApplication.setCollateral(0);
 		loanApplication.setStatus(null);
 		return loanApplication;
@@ -19,7 +20,8 @@ public class UnitTestLoanApplicationSupport {
 		LoanApplicationDto loanApplicationDto = new LoanApplicationDto();
 		loanApplicationDto.setCreatedAt(loanApplication.getCreatedAt());
 		loanApplicationDto.setUpdatedAt(loanApplication.getUpdatedAt());
-		loanApplicationDto.setLoanAmount(loanApplication.getLoanAmount());
+		loanApplicationDto.setDesiredLoanAmount(loanApplication.getDesiredLoanAmount());
+		loanApplicationDto.setMaxLoanAmount(loanApplication.getMaxLoanAmount());
 		loanApplicationDto.setCollateral(loanApplication.getCollateral());
 		loanApplicationDto.setStatus(loanApplication.getStatus());
 		return loanApplicationDto;

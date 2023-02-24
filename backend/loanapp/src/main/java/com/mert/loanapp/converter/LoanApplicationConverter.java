@@ -12,7 +12,8 @@ public class LoanApplicationConverter {
 		LoanApplicationDto loanApplicationDto = new LoanApplicationDto();
 		loanApplicationDto.setCreatedAt(loanApplication.getCreatedAt());
 		loanApplicationDto.setUpdatedAt(loanApplication.getUpdatedAt());
-		loanApplicationDto.setLoanAmount(loanApplication.getLoanAmount());
+		loanApplicationDto.setMaxLoanAmount(loanApplication.getMaxLoanAmount());
+		loanApplicationDto.setDesiredLoanAmount(loanApplication.getDesiredLoanAmount());
 		loanApplicationDto.setCollateral(loanApplication.getCollateral());
 		loanApplicationDto.setStatus(loanApplication.getStatus());
 		loanApplicationDto.setCreditLimitFactor(loanApplication.getCreditLimitFactor());

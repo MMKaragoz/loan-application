@@ -42,6 +42,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 		loanApplication.setCustomer(customer);
 		loanApplication.setCollateral(request.getCollateral());
 		loanApplication.setCreditLimitFactor(request.getCreditLimitFactor());
+		loanApplication.setDesiredLoanAmount(request.getDesiredLoanAmount());
 		
 		loanApplicationEvaluatorService.evaluateLoanApplication(loanApplication);
 		loanApplicationRepository.save(loanApplication);

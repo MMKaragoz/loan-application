@@ -12,7 +12,7 @@ public class LoanApplicationEvaluatorServiceImpl implements LoanApplicationEvalu
 	
 	@Override
 	public void evaluateLoanApplication(LoanApplication loanApplication) {
-		calculateLoanAmount(loanApplication);
+		calculateMaxLoanAmount(loanApplication);
 		updateLoanStatus(loanApplication);
 	}
 
@@ -20,37 +20,46 @@ public class LoanApplicationEvaluatorServiceImpl implements LoanApplicationEvalu
 		Customer customer = loanApplication.getCustomer();
 		int creditScore = customer.getCreditScore();
 		LoanStatus status = loanApplication.getStatus();
-
-		if (creditScore < 500) {
+		double maxLoanAmount = loanApplication.getMaxLoanAmount();
+		double desiredLoanAmount = loanApplication.getDesiredLoanAmount();
+		
+		if (creditScore < 500 || !isDesiredLoanAmountOK(maxLoanAmount, desiredLoanAmount)) {
 			status = LoanStatus.DECLINED;
-		} else {
+		} else if(isDesiredLoanAmountOK(maxLoanAmount, desiredLoanAmount)) {
 			status = LoanStatus.APPROVED;
 		}
-
+		System.out.println(status);
+		System.out.println(isDesiredLoanAmountOK(maxLoanAmount, desiredLoanAmount));
 		loanApplication.setStatus(status);
 	}
 
-	private void calculateLoanAmount(LoanApplication loanApplication) {
+	private void calculateMaxLoanAmount(LoanApplication loanApplication) {
 		Customer customer = loanApplication.getCustomer();
 		int creditScore = customer.getCreditScore();
 		double monthlyIncome = customer.getMonthlyIncome();
 		double collateral = loanApplication.getCollateral();
-		double loanAmount = 0.0;
+		double maxLoanAmount = 0.0;
 		double creditLimitFactor = loanApplication.getCreditLimitFactor();
 
 		if (creditScore >= 500 && creditScore < 1000) {
 			if (monthlyIncome < 5000) {
-				loanAmount = 10000 + collateral * 0.1;
+				maxLoanAmount = 10000 + collateral * 0.1;
 			} else if (monthlyIncome >= 5000 && monthlyIncome < 10000) {
-				loanAmount = 20000 + collateral * 0.2;
+				maxLoanAmount = 20000 + collateral * 0.2;
 			} else {
-				loanAmount = (monthlyIncome * creditLimitFactor / 2) + collateral * 0.25;
+				maxLoanAmount = (monthlyIncome * creditLimitFactor / 2) + collateral * 0.25;
 			}
 		} else if (creditScore >= 1000 && creditScore <= 1900) {
-			loanAmount = (monthlyIncome * creditLimitFactor) + collateral * 0.5;
+			maxLoanAmount = (monthlyIncome * creditLimitFactor) + collateral * 0.5;
 		}
 
-		loanApplication.setLoanAmount(loanAmount);
+		loanApplication.setMaxLoanAmount(maxLoanAmount);
 	}
 	
+	private Boolean isDesiredLoanAmountOK(double maxLoanAmount, double desiredLoanAmount) {
+		if (maxLoanAmount >= desiredLoanAmount) {
+			return true;
+		}
+		return false;
+	}
 }

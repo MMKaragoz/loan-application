@@ -40,11 +40,15 @@ public class LoanApplication extends BaseEntity {
 	@JoinColumn(name = "user_id", nullable = false)
 	private Customer customer;
 	
-	@Min(value = 0, message = "Loan amount cannot be negative")
+	@Min(value = 0, message = "Desired loan amount cannot be negative")
 	@Column(nullable = false)
-	private double loanAmount;
+	private double desiredLoanAmount;
 	
-	@Min(value = 0, message = "Loan amount cannot be negative")
+	@Min(value = 0, message = "Max loan amount cannot be negative")
+	@Column(nullable = false)
+	private double maxLoanAmount;
+	
+	@Min(value = 0, message = "Collateral cannot be negative")
 	private double collateral;
 	
 	@Column(nullable = false)
@@ -57,16 +61,20 @@ public class LoanApplication extends BaseEntity {
 	public LoanApplication() {
 		
 	}
-	
+
 	public LoanApplication(Date createdAt, Date updatedAt, String id, Customer customer,
-			@Min(value = 0, message = "Loan amount cannot be negative") double loanAmount,
-			@Min(value = 0, message = "Loan amount cannot be negative") double collateral, LoanStatus status) {
+			@Min(value = 0, message = "Desired loan amount cannot be negative") double desiredLoanAmount,
+			@Min(value = 0, message = "Max loan amount cannot be negative") double maxLoanAmount,
+			@Min(value = 0, message = "Collateral cannot be negative") double collateral, LoanStatus status,
+			@Min(value = 0, message = "Credit Limit factor cannot be negative") double creditLimitFactor) {
 		super(createdAt, updatedAt);
 		this.id = id;
 		this.customer = customer;
-		this.loanAmount = loanAmount;
+		this.desiredLoanAmount = desiredLoanAmount;
+		this.maxLoanAmount = maxLoanAmount;
 		this.collateral = collateral;
 		this.status = status;
+		this.creditLimitFactor = creditLimitFactor;
 	}
 
 	public String getId() {
@@ -81,16 +89,24 @@ public class LoanApplication extends BaseEntity {
 		return customer;
 	}
 
-	public void setCustomer(Customer user) {
-		this.customer = user;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
-	public double getLoanAmount() {
-		return loanAmount;
+	public double getDesiredLoanAmount() {
+		return desiredLoanAmount;
 	}
 
-	public void setLoanAmount(double loanAmount) {
-		this.loanAmount = loanAmount;
+	public void setDesiredLoanAmount(double desiredLoanAmount) {
+		this.desiredLoanAmount = desiredLoanAmount;
+	}
+
+	public double getMaxLoanAmount() {
+		return maxLoanAmount;
+	}
+
+	public void setMaxLoanAmount(double maxLoanAmount) {
+		this.maxLoanAmount = maxLoanAmount;
 	}
 
 	public double getCollateral() {
@@ -121,7 +137,8 @@ public class LoanApplication extends BaseEntity {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(collateral, creditLimitFactor, customer, id, loanAmount, status);
+		result = prime * result
+				+ Objects.hash(collateral, creditLimitFactor, customer, desiredLoanAmount, id, maxLoanAmount, status);
 		return result;
 	}
 
@@ -136,15 +153,18 @@ public class LoanApplication extends BaseEntity {
 		LoanApplication other = (LoanApplication) obj;
 		return Double.doubleToLongBits(collateral) == Double.doubleToLongBits(other.collateral)
 				&& Double.doubleToLongBits(creditLimitFactor) == Double.doubleToLongBits(other.creditLimitFactor)
-				&& Objects.equals(customer, other.customer) && Objects.equals(id, other.id)
-				&& Double.doubleToLongBits(loanAmount) == Double.doubleToLongBits(other.loanAmount)
+				&& Objects.equals(customer, other.customer)
+				&& Double.doubleToLongBits(desiredLoanAmount) == Double.doubleToLongBits(other.desiredLoanAmount)
+				&& Objects.equals(id, other.id)
+				&& Double.doubleToLongBits(maxLoanAmount) == Double.doubleToLongBits(other.maxLoanAmount)
 				&& status == other.status;
 	}
 
 	@Override
 	public String toString() {
-		return "LoanApplication [id=" + id + ", customer=" + customer + ", loanAmount=" + loanAmount + ", collateral="
-				+ collateral + ", status=" + status + ", creditLimitFactor=" + creditLimitFactor + "]";
+		return "LoanApplication [id=" + id + ", customer=" + customer + ", desiredLoanAmount=" + desiredLoanAmount
+				+ ", maxLoanAmount=" + maxLoanAmount + ", collateral=" + collateral + ", status=" + status
+				+ ", creditLimitFactor=" + creditLimitFactor + "]";
 	}
 	
 }

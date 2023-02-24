@@ -78,7 +78,7 @@ const PersonalLoanApplication = () => {
       name: formData.name,
       surname: formData.surname,
       email: formData.email,
-      monthlyIncome: formData.monthlyIncome,
+      monthlyIncome: parseFloat(formData.monthlyIncome),
       phoneNumber: formData.phoneNumber,
       birthDate: formData.birthDate,
     };
@@ -95,8 +95,9 @@ const PersonalLoanApplication = () => {
   const createLoanApplication = async (customerId) => {
     const createLoanApplicationRequest = {
       customerId: customerId,
-      collateral: parseInt(formData.collateral),
+      collateral: formData.collateral,
       creditLimitFactor: 4,
+      desiredLoanAmount: formData.amountOfLoan,
     };
     try {
       await axios.post("/loan-applications", createLoanApplicationRequest);
