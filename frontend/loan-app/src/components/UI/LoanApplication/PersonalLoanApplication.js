@@ -6,6 +6,7 @@ import IDInformation from "./IDInformation/IDInformation";
 import LoanApplicationDetails from "./LoanApplicationDetails/LoanApplicationDetails";
 import PersonalDetails from "./PersonalDetails/PersonalDetails";
 import ReviewLoanApplication from "./ReviewLoanApplication/ReviewLoanApplication";
+import HomePage from "../HomePage/HomePage";
 import {
   Button,
   Paper,
@@ -42,6 +43,7 @@ function getStepContent(step, formData, setFormData, errors) {
     case 3:
       return <ReviewLoanApplication formData={formData} />;
     default:
+      return <HomePage />;
   }
 }
 

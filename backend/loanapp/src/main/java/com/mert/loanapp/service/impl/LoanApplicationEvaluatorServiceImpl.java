@@ -28,8 +28,6 @@ public class LoanApplicationEvaluatorServiceImpl implements LoanApplicationEvalu
 		} else if(isDesiredLoanAmountOK(maxLoanAmount, desiredLoanAmount)) {
 			status = LoanStatus.APPROVED;
 		}
-		System.out.println(status);
-		System.out.println(isDesiredLoanAmountOK(maxLoanAmount, desiredLoanAmount));
 		loanApplication.setStatus(status);
 	}
 

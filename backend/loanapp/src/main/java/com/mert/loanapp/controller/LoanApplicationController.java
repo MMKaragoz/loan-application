@@ -1,7 +1,9 @@
 package com.mert.loanapp.controller;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mert.loanapp.client.dto.request.CreateLoanApplicationRequest;
 import com.mert.loanapp.client.dto.request.UpdateLoanApplicationRequest;
 import com.mert.loanapp.client.dto.response.LoanApplicationDto;
+import com.mert.loanapp.model.LoanApplication;
 import com.mert.loanapp.service.LoanApplicationService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -43,9 +46,11 @@ public class LoanApplicationController {
 	@Operation(summary = "Create a loan application")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<String> create(@Valid @RequestBody CreateLoanApplicationRequest request) {
-		loanApplicationService.create(request);
-		String response = "Loan application has been created successfully.";
+	public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody CreateLoanApplicationRequest request) {
+		LoanApplication loanApplication = loanApplicationService.create(request);
+		Map<String, Object> response = new HashMap<>();
+		response.put("status", loanApplication.getStatus());
+		response.put("limit", loanApplication.getMaxLoanAmount());
 		return ResponseEntity.ok(response);
 	}
 	

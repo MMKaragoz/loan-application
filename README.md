@@ -17,7 +17,7 @@
 - Clone the repository. <br>
 
 ```
-    https://github.com/MMKaragoz/loan-application
+    git clone https://github.com/MMKaragoz/loan-application
 ```
 
 ## How to run
@@ -28,7 +28,7 @@ There is two ways to run the app.
 
 - Open two terminals and make sure of that you are in main directory.
 
-### Starting Backend
+#### <b> Starting Backend </b>
 
 <br>
 Open first terminal and apply those below respectively. <br>
@@ -40,7 +40,7 @@ Open first terminal and apply those below respectively. <br>
     $ mvn spring-boot:run
 ```
 
-### Starting Frontend
+#### <b> Starting Frontend </b>
 
 <br>
 Open second terminal and apply those below respectively. <br>
@@ -51,6 +51,10 @@ Open second terminal and apply those below respectively. <br>
     $ npm install
     $ npm start
 ```
+
+### <b> Docker Compose </b>
+
+`docker-compose up`
 
 ### Swagger Endpoint
 

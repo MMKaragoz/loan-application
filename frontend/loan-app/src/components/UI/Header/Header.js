@@ -1,4 +1,4 @@
-import { AppBar, makeStyles, Toolbar, Typography } from "@mui/material";
+import { AppBar, Toolbar, Typography } from "@mui/material";
 import React from "react";
 
 const Header = () => {

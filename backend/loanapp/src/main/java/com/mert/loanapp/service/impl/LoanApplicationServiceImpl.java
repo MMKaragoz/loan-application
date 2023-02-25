@@ -44,7 +44,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 
 	@Override
 	@Transactional
-	public void create(@Valid CreateLoanApplicationRequest request) {
+	public LoanApplication create(@Valid CreateLoanApplicationRequest request) {
 		LoanApplication loanApplication = new LoanApplication();
 		Customer customer = customerService.findById(request.getCustomerId());
 		loanApplication.setCustomer(customer);
@@ -55,7 +55,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 		loanApplicationEvaluatorService.evaluateLoanApplication(loanApplication);
 		loanApplication = loanApplicationRepository.save(loanApplication);
 		smsService.sendResultOfLoanApplication(customer.getFullName(), loanApplication.getStatus(), loanApplication.getDesiredLoanAmount(), customer.getPhoneNumber());
-		
+		return loanApplication;
 	}
 	
 	@Override

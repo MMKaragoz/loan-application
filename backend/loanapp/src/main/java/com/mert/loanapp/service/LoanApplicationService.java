@@ -12,7 +12,7 @@ import jakarta.validation.Valid;
 
 public interface LoanApplicationService {
 
-	void create(@Valid CreateLoanApplicationRequest request);
+	LoanApplication create(@Valid CreateLoanApplicationRequest request);
 
 	LoanApplication findById(String id);
 	
