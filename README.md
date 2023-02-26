@@ -60,7 +60,7 @@ Open second terminal and apply those below respectively. <br>
 
 ## Archictecture
 
-![architecture](/docs/loan-app-archictecture.svg)
+![architecture](/docs/loan-app-archictecture.png)
 
 ## Database Diagram
 
