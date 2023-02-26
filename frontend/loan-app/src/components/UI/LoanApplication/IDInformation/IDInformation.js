@@ -36,10 +36,11 @@ const IDInformation = (props) => {
       <Typography variant="h6" gutterBottom>
         ID Information
       </Typography>
+
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
           <TextField
-            required
+            required={true}
             id="idNumber"
             name="idNumber"
             label="ID Number"
@@ -59,10 +60,11 @@ const IDInformation = (props) => {
         <Grid item xs={12} sm={12}>
           <TextField
             required
+            hiddenlabel
             type="date"
             id="standard-size-small"
             name="birthDate"
-            label="Birth Date"
+            // label="Birth Date"
             fullWidth
             autoComplete="family-name"
             variant="standard"

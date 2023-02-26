@@ -15,12 +15,15 @@ import { Link } from "react-router-dom";
 const loans = [
   {
     title: "Personal Loan",
+    detail: "You can apply personal loan by clicking Apply.",
   },
   {
     title: "Housing Loan",
+    detail: "You can apply housing loan by clicking Apply.",
   },
   {
     title: "Vehicle Loan",
+    detail: "You can apply vehicle loan by clicking Apply.",
   },
 ];
 
@@ -63,9 +66,7 @@ const HomePage = () => {
                       {loan.title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      Lizards are a widespread group of squamate reptiles, with
-                      over 6,000 species, ranging across all continents except
-                      Antarctica
+                      {loan.detail}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
