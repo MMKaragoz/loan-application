@@ -57,14 +57,14 @@ public class CustomerController {
 	@Operation(summary = "Update a customer by id")
 	@PutMapping("/{id}")
 	public ResponseEntity<CustomerDto> update(@PathVariable("id") String id, @Valid @RequestBody UpdateCustomerRequest request) {
-		CustomerDto response = customerService.update(id, request);
+		CustomerDto response = customerService.updateById(id, request);
 		return ResponseEntity.ok(response);
 	}
 	
 	@Operation(summary = "Delete a customer by id")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable("id") String id) {
-		customerService.delete(id);
+		customerService.deleteById(id);
 		String response = "Customer deleted successfully ";
 		return ResponseEntity.ok(response);
 	}

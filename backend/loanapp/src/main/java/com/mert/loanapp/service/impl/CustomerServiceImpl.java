@@ -56,7 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	@Transactional
-	public CustomerDto update(String id, @Valid UpdateCustomerRequest request) {
+	public CustomerDto updateById(String id, @Valid UpdateCustomerRequest request) {
 		Customer customer = findById(id);
 		customer.setEmail(request.getEmail());
 		customer.setMonthlyIncome(request.getMonthlyIncome());
@@ -69,7 +69,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	@Transactional
-	public void delete(String id) {
+	public void deleteById(String id) {
 		findById(id);
 		customerRepository.deleteById(id);
 	}

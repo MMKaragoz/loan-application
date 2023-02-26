@@ -15,7 +15,7 @@ import com.mert.loanapp.model.LoanApplication;
 import com.mert.loanapp.model.enums.LoanStatus;
 import com.mert.loanapp.service.impl.LoanApplicationEvaluatorServiceImpl;
 
-public class TestLoanApplicationEvaluatorService {
+public class LoanApplicationEvaluatorServiceTest {
 
 	private LoanApplicationEvaluatorService loanApplicationEvalutorService;
 	

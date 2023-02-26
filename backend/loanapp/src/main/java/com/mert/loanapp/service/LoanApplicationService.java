@@ -18,9 +18,9 @@ public interface LoanApplicationService {
 	
 	LoanApplicationDto getById(String id);
 
-	LoanApplicationDto update(String id, @Valid UpdateLoanApplicationRequest request);
+	LoanApplicationDto updateById(String id, @Valid UpdateLoanApplicationRequest request);
 
-	void delete(String id);
+	void deleteById(String id);
 
 	List<LoanApplicationDto> getAllByIdNumberAndBirthDate(
 			String idNumber,

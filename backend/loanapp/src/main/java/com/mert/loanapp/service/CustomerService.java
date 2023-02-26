@@ -17,9 +17,9 @@ public interface CustomerService {
 
 	CustomerDto getById(String id);
 	
-	CustomerDto update(String id, @Valid UpdateCustomerRequest request);
+	CustomerDto updateById(String id, @Valid UpdateCustomerRequest request);
 
-	void delete(String id);
+	void deleteById(String id);
 
 	CustomerDto getByIdNumberAndBirthDate(String idNumber, LocalDate birthDate);
 

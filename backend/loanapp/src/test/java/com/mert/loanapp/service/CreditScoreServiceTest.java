@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import com.mert.loanapp.service.impl.CreditScoreServiceImpl;
 
-public class TestCreditScoreService {
+public class CreditScoreServiceTest {
 
 	private CreditScoreService creditScoreService;
 	

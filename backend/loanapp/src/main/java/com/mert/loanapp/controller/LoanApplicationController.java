@@ -64,14 +64,14 @@ public class LoanApplicationController {
 	@Operation(summary = "Update a loan application by id")
 	@PutMapping("/{id}")
 	public ResponseEntity<LoanApplicationDto> update(@PathVariable("id") String id, @Valid @RequestBody UpdateLoanApplicationRequest request) {
-		LoanApplicationDto response = loanApplicationService.update(id, request);
+		LoanApplicationDto response = loanApplicationService.updateById(id, request);
 		return ResponseEntity.ok(response);
 	}
 	
 	@Operation(summary = "Delete a loan application by id")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable("id") String id) {
-		loanApplicationService.delete(id);
+		loanApplicationService.deleteById(id);
 		String response = "Loan application deleted successfully ";
 		return ResponseEntity.ok(response);
 	}

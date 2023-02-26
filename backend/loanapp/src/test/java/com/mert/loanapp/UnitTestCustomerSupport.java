@@ -32,7 +32,7 @@ public static final String USER_API_ENDPOINT = "api/v1/users";
 		return customer;		
 	}
 	
-	public static CustomerDto generateUserDto(Customer customer) {
+	public static CustomerDto generateCustomerDto(Customer customer) {
 		
 		CustomerDto customerDto = new CustomerDto();
 				customerDto.setIdNumber(customer.getIdNumber());

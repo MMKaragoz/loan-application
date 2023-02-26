@@ -30,7 +30,7 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 	private final CustomerService customerService;
 	private final LoanApplicationEvaluatorService loanApplicationEvaluatorService;
 	private final SMSService smsService;
-	
+
 	public LoanApplicationServiceImpl(LoanApplicationRepository loanApplicationRepository,
 			LoanApplicationConverter converter, CustomerService customerService,
 			LoanApplicationEvaluatorService loanApplicationEvaluatorService,
@@ -51,13 +51,14 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 		loanApplication.setCollateral(request.getCollateral());
 		loanApplication.setCreditLimitFactor(request.getCreditLimitFactor());
 		loanApplication.setDesiredLoanAmount(request.getDesiredLoanAmount());
-		
+
 		loanApplicationEvaluatorService.evaluateLoanApplication(loanApplication);
 		loanApplication = loanApplicationRepository.save(loanApplication);
-		smsService.sendResultOfLoanApplication(customer.getFullName(), loanApplication.getStatus(), loanApplication.getDesiredLoanAmount(), customer.getPhoneNumber());
+		smsService.sendResultOfLoanApplication(customer.getFullName(), loanApplication.getStatus(),
+				loanApplication.getDesiredLoanAmount(), customer.getPhoneNumber());
 		return loanApplication;
 	}
-	
+
 	@Override
 	@Transactional(readOnly = true)
 	public LoanApplication findById(String id) {
@@ -76,11 +77,11 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 
 	@Override
 	@Transactional
-	public LoanApplicationDto update(String id, @Valid UpdateLoanApplicationRequest request) {
+	public LoanApplicationDto updateById(String id, @Valid UpdateLoanApplicationRequest request) {
 		LoanApplication loanApplication = findById(id);
 		loanApplication.setCollateral(request.getCollateral());
 		loanApplication.setCreditLimitFactor(request.getCreditLimitFactor());
-		
+
 		loanApplication = loanApplicationRepository.save(loanApplication);
 		LoanApplicationDto loanApplicationDto = converter.convertLoanApplicationToLoanApplicationDto(loanApplication);
 		return loanApplicationDto;
@@ -88,18 +89,18 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 
 	@Override
 	@Transactional
-	public void delete(String id) {
+	public void deleteById(String id) {
 		findById(id);
 		loanApplicationRepository.deleteById(id);
-		
+
 	}
-	
+
 	@Override
 	@Transactional(readOnly = true)
 	public List<LoanApplicationDto> getAllByIdNumberAndBirthDate(String idNumber, LocalDate birthDate) {
 		CustomerDto customerDto = customerService.getByIdNumberAndBirthDate(idNumber, birthDate);
 		List<LoanApplicationDto> loanApplications = customerDto.getLoanApplications();
-		
+
 		return loanApplications;
 	}
 
