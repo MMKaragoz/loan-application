@@ -54,7 +54,17 @@ Open second terminal and apply those below respectively. <br>
 
 ### <b> Docker Compose </b>
 
-`docker-compose up`
+```ssh
+ docker-compose up
+```
+
+## Archictecture
+
+![architecture](/docs/loan-app-archictecture.svg)
+
+## Database Diagram
+
+![diagram](/docs/loan-application-db.png)
 
 ### Swagger Endpoint
 
