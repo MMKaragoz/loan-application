@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -143,7 +144,7 @@ public class CustomerServiceTest extends UnitTestCustomerSupport{
 		verify(customerRepository, times(1)).deleteById(Mockito.anyString());
 	}
 	
-	@DisplayName("testGetByIdNumberAndBirthDate should return CustomerDto when ID Number and Birth Dat exists")
+	@DisplayName("testGetByIdNumberAndBirthDate should return CustomerDto when ID Number and Birth Date exists.")
 	@ParameterizedTest
 	@CsvSource({"12315070882, 2023-02-12", "12315070880, 2000-02-12", "12315070884, 1993-02-22", "12315070886, 2013-01-12", "12315070888, 2003-02-22"})
 	void testGetByIdNumberAndBirthDate_shouldReturnCustomerDto_whenIdNumberAndBirthDateExist(String idNumber, LocalDate birthDate) {
@@ -163,7 +164,7 @@ public class CustomerServiceTest extends UnitTestCustomerSupport{
 		verify(converter, times(1)).convertCustomerToCustomerDto(customer);
 	}
 	
-	@DisplayName("testGetByIdNumberAndBirthDate should return CustomerDto when ID Number and Birth Dat exists")
+	@DisplayName("testGetByIdNumberAndBirthDate should throw NotFoundException when ID Number and Birth Date do not exist.")
 	@ParameterizedTest
 	@CsvSource({"12315070882, 2023-02-12", "12315070880, 2000-02-12", "12315070884, 1993-02-22", "12315070886, 2013-01-12", "12315070888, 2003-02-22"})
 	void testGetByIdNumberAndBirthDate_shouldThrowNotFoundException_whenIdNumberAndBirthDateDoNotExist(String idNumber, LocalDate birthDate) {
@@ -175,6 +176,11 @@ public class CustomerServiceTest extends UnitTestCustomerSupport{
 		assertThrows(NotFoundException.class, () -> customerService.getByIdNumberAndBirthDate(idNumber, birthDate));
 		verify(customerRepository, times(1)).findByIdNumberAndBirthDate(idNumber, birthDate);
 		verify(converter, times(0)).convertCustomerToCustomerDto(customer);
+	}
+	
+	@AfterEach
+	void tearDown() {
+
 	}
 	
 }

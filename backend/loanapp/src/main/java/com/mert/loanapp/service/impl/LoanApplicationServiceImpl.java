@@ -45,8 +45,8 @@ public class LoanApplicationServiceImpl implements LoanApplicationService {
 	@Override
 	@Transactional
 	public LoanApplication create(@Valid CreateLoanApplicationRequest request) {
-		LoanApplication loanApplication = new LoanApplication();
 		Customer customer = customerService.findById(request.getCustomerId());
+		LoanApplication loanApplication = new LoanApplication();
 		loanApplication.setCustomer(customer);
 		loanApplication.setCollateral(request.getCollateral());
 		loanApplication.setCreditLimitFactor(request.getCreditLimitFactor());
