@@ -60,7 +60,7 @@ not working yet.
  docker-compose up
 ```
 
-## Archictecture
+## Architecture
 
 ![architecture](/docs/loan-app-archictecture.png)
 
@@ -77,3 +77,7 @@ not working yet.
 ```
 http://localhost:${PORT}/swagger-ui/index.html
 ```
+
+<b>Example</b>
+
+![swagger-example](/docs/swagger-example.png)
