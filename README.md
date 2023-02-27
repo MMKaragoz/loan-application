@@ -22,7 +22,7 @@
 
 ## How to run
 
-There is two ways to run the app.
+There are two ways to run the app.
 
 ### <b> Maven and npm </b>
 
