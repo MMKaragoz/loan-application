@@ -37,7 +37,7 @@ public class LoanApplication extends BaseEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "customer_id", nullable = false)
 	private Customer customer;
 	
 	@Min(value = 0, message = "Desired loan amount cannot be negative")

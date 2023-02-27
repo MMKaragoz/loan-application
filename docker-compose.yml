@@ -1,0 +1,34 @@
+version: "3.7"
+
+services:
+  app-server:
+    build: backend/loanapp
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/loan-db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=dev
+      - SPRING_DATASOURCE_PASSWORD=dev
+    depends_on:
+      - db
+
+  db:
+    image: mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "1"
+      MYSQL_DATABASE: loan-db
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: dev
+      MYSQL_ROOT_HOST: "%"
+    restart: on-failure
+    volumes:
+      - db-data:/var/lib/mysql
+
+  app-client:
+    build: frontend/loan-app
+    ports:
+      - "3000:3000"
+
+volumes:
+  db-data: {}
