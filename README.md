@@ -54,6 +54,8 @@ Open second terminal and apply those below respectively. <br>
 
 ### <b> Docker Compose </b>
 
+not working yet.
+
 ```ssh
  docker-compose up
 ```
